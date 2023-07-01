@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
-import { Prisma } from './database/prisma'
+import { Prisma } from './application/infra/database/prisma'
 
 
 const app = express()
