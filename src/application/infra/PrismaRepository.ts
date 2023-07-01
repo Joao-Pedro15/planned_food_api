@@ -1,12 +1,11 @@
-interface Search<Identificator, Type=null> {
-  where: { id: Identificator }
-  data?: Partial<Type>
+interface Search<Identificator> {
+  where: { id: Identificator },
 }
 
 export interface Model<Type, Identificator> {
-  create(data: Type): any
+  create(data: { data: Type }): any
   findUnique(data: Search<Identificator>): any
-  update(data: Search<Identificator, Partial<Type>>):any
+  update(data: Search<Identificator>&{data: Partial<Type>}):any
   delete(data: Search<Identificator>): any
 }
 
@@ -17,7 +16,7 @@ export class PrismaRepository<Type, Identificator> {
   }
 
   async add(data: Type) {
-    return await this.model.create(data)
+    return await this.model.create({data})
   }
 
   async getById(id: Identificator) {
