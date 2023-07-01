@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+   url      = "file:./database.db"
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String
+  password String
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  foods Food[]
+}
+
+model Food {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  aminoAcids AminoAcid?
+  fattyAcids FattyAcid?
+  nutrients  Nutrient?
+
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+}
+
+model AminoAcid {
+  id Int @id @default(autoincrement())
+
+  food   Food @relation(fields: [foodId], references: [id])
+  foodId Int  @unique
+
+  tryptophan    Float
+  threonine     Float
+  isoleucine    Float
+  leucine       Float
+  lysine        Float
+  methionine    Float
+  cystine       Float
+  phenylalanine Float
+  tyrosine      Float
+  valine        Float
+  arginine      Float
+  histidine     Float
+  alanine       Float
+  asparticAcid  Float
+  glutamicAcid  Float
+  glycine       Float
+  proline       Float
+  serine        Float
+}
+
+model FattyAcid {
+  food   Food @relation(fields: [foodId], references: [id])
+  foodId Int  @unique
+
+  saturated       Float
+  monounsaturated Float
+  polyunsaturated Float
+
+  twelveZero      Float? 
+  fourteenZero    Float? 
+  fourteenOne     Float? 
+  sixteenZero     Float? 
+  sixteenOne      Float? 
+  eighteenZero    Float? 
+  eighteenOne     Float? 
+  eighteenOneT    Float?
+  eighteenTwoN6   Float? 
+  eighteenTwoT    Float?
+  eighteenThreeN3 Float?
+  twentyZero      Float? 
+  twentyOne       Float? 
+  twentyFour      Float? 
+  twentyFive      Float? 
+  twentyTwoZero   Float? 
+  twentyTwoFive   Float? 
+  twentyTwoSix    Float? 
+  twentyFourZero  Float? 
+
+  @@map("fatty_acids")
+}
+
+model Nutrient {
+  id     Int  @id @default(autoincrement())
+  food   Food @relation(fields: [foodId], references: [id])
+  foodId Int  @unique
+
+  moisture      Float?
+  kcal          Float?
+  kJ            Float?
+  protein       Float?
+  lipids        Float?
+  cholesterol   Float?
+  carbohydrates Float?
+  dietaryFiber  Float?
+  ash           Float?
+  calcium       Float?
+  magnesium     Float?
+  manganese     Float?
+  phosphorus    Float?
+  iron          Float?
+  sodium        Float?
+  potassium     Float?
+  copper        Float?
+  zinc          Float?
+  retinol       Float?
+  re            Float?
+  rae           Float?
+  thiamin       Float?
+  riboflavin    Float?
+  pyridoxine    Float?
+  niacin        Float?
+  vitaminC      Float?
+}
+
+model Unit {
+  id        Int    @id @default(autoincrement())
+  fieldName String
+  unit      String
+  labelPt   String
+
+  infoodsTagname String?
+  systematicName String?
+  commonName     String?
+}
