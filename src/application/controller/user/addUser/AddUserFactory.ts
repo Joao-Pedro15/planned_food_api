@@ -12,3 +12,5 @@ class AddUserFactory {
     return await user.execute(data)
   }
 }
+
+export default new AddUserFactory()
