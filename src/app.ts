@@ -1,4 +1,6 @@
 import 'dotenv/config'
+import './config/module-alias'
+import { food, user } from './routes/index'
 import express from 'express'
 import cors from 'cors'
 import { Prisma } from './application/infra/database/prisma'
