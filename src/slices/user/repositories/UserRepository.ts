@@ -13,6 +13,10 @@ export class UserRepository implements IUserRepository{
     return await this.repository.getById(id)
   }
 
+  async getByEmail(email: string): Promise<User> {
+    return await this.repository.getByEmail(email) 
+  }
+
   async update(id: string, data: Partial<User>): Promise<any> {
     return await this.repository.update(id, data)
   }
