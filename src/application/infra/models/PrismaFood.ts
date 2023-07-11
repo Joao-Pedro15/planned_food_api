@@ -8,13 +8,18 @@ export class PrismaFood extends PrismaRepository<Food, number> {
     super(repository)
   }
 
-  async get({ limit, offSet, search }: QueryFood) {
+  async get({ limit, offSet, search, category }: QueryFood) {
     return await Prisma.food.findMany({
       where: {
-        name: { contains: search }
+        name: { contains: search },
+        category:{ name: { contains: category } }
+      },
+      include: {
+        category: true,
+        nutrients: true
       },
       take: limit ? Number(limit) : 60,
-      skip: limit ? Number(offSet) : 0
+      skip: offSet ? Number(offSet) : 0
     })
   }
 
