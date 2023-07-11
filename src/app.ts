@@ -18,4 +18,6 @@ app.get('/teste', async (_, response) => {
   return response.status(200).json(teste)
 })
 
+app.use('/food', food.default)
+
 export default app
