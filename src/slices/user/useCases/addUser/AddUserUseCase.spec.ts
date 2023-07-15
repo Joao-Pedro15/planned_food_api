@@ -20,6 +20,7 @@ describe('testing useCase adduser', () => {
     userRepository = mock()
     encrypter = mock()
     userRepository.add.mockResolvedValue(undefined)
+    userRepository.getByEmail.mockResolvedValue(null)
     encrypter.encrypt.mockResolvedValue('passwordEncrypter')
   })
   beforeEach(() => {
@@ -29,5 +30,11 @@ describe('testing useCase adduser', () => {
     await testInstance.execute(fakeUser)
     expect(encrypter.encrypt).toHaveBeenCalledWith(fakeUser.password, 12)
     expect(userRepository.add).toHaveBeenCalledWith({...fakeUser, password: 'passwordEncrypter'})
+  })
+
+  it('should return error email is already register in database', async () => {
+    userRepository.getByEmail.mockResolvedValueOnce(fakeUser)
+    await expect(testInstance.execute(fakeUser))
+    .rejects.toThrowError('not found user')
   })
 })
