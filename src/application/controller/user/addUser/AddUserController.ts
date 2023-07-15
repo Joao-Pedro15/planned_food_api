@@ -9,9 +9,9 @@ class AddUserController {
       const user = await factory.build(data)
       return response.status(201).json(user)
     } catch (error) {
-      return response.status(500).json({
+      return response.status(error.statusCode).json({
         message: error.message,
-        statusCode: 500
+        statusCode: error.statusCode
       })
     }
   }
