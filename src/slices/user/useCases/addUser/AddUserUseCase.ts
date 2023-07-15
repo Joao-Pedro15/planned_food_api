@@ -12,7 +12,7 @@ export class AddUserUseCase {
   async execute(data: Omit<User, 'id'>) {
    try {
     const isUser = await this.userRepository.getByEmail(data.email)
-    if(isUser) throw new Error("email already registered")
+    if(isUser) throw new HandleError('not found user', 404)
     const hashPassword = await this.encrypter.encrypt(data.password, 12)
     return await this.userRepository.add({...data, password: hashPassword})
    } catch (error) {
