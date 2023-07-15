@@ -2,6 +2,6 @@ import AddUserController from "@/application/controller/user/addUser/AddUserCont
 import { Router } from "express";
 const router = Router()
 
-router.post('/user', AddUserController.handle)
+router.post('/addUser', AddUserController.handle)
 
 export default router
