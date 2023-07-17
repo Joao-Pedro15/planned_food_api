@@ -40,11 +40,28 @@ describe('e2e routes from user', () => {
     })
   })
 
-  test("should return error not found user in database",  async () => {
-    const response = await request(server)
-    .get(`/user/getUser/${fakeUser.id}`)
-    expect(response.notFound).toBeTruthy()
-    expect(response.status).toBe(404)
-    expect(JSON.parse(response.text).message).toBe('not found user')
+  describe("e2e test LOGIN route", () => {
+    test('should return token in login successfully', async () => {
+      const response = await request(server)
+      .post('/user/login')
+      .send(fakeUser)
+      expect(response.status).toBe(200)
+    })
+    test('should return error in login not found email', async () => {
+      const response = await request(server)
+      .post('/user/login')
+      .send({...fakeUser, email: 'emailNotExist@gmail.com'})
+      expect(response.notFound).toBeTruthy()
+      expect(response.status).toBe(404)
+      expect(JSON.parse(response.text).message).toBe('not found user by email emailNotExist@gmail.com')
+    })
+    test('should return error in login password incorrect', async () => {
+      const response = await request(server)
+      .post('/user/login')
+      .send({...fakeUser, password: 'other password'})
+      expect(response.clientError).toBeTruthy()
+      expect(response.status).toBe(400)
+      expect(JSON.parse(response.text).message).toBe('password incorrect!')
+    })
   })
 })
