@@ -13,7 +13,7 @@ export class LoginUseCase {
     try {
       const user = await this.userRepository.getByEmail(email)
       if(!user) throw new HandleError('not found user by email '+ email, 404)
-      if(!this.crypto.compare(password, user.password)) throw new HandleError('password incorrect!', 404)
+      if(!this.crypto.compare(password, user.password)) throw new HandleError('password incorrect!', 400)
       return this.crypto.generate(user.id, 'mySecret', '2 days')
     } catch (error) {
       if(error instanceof HandleError) throw new HandleError(error.message, error.statusCode)
