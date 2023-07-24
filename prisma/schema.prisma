@@ -15,12 +15,39 @@ model User {
   name String
   email String
   password String
+  ucMeal  Meal[] @relation("ucMeal")
+  uuMeal  Meal[] @relation("uuMeal")
 }
 
 model Category {
   id    Int    @id @default(autoincrement())
   name  String @unique
   foods Food[]
+}
+
+model Meal {
+  id String @id @default(uuid())
+  name String
+  date  DateTime
+  items MealItem[]
+  createdAt  DateTime @default(now())
+  updatedAt DateTime?
+  userCreated String
+  userUpdated String?
+  createdUser User @relation(name: "ucMeal", references: [id], fields: [userCreated])
+  updatedUser User? @relation(name: "uuMeal", references: [id], fields: [userUpdated])
+
+}
+
+model MealItem {
+  id    String @id @default(uuid())
+  foodId  Int
+  mealId   String
+  quantity    Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+  food        Food @relation(references: [id], fields: [foodId])
+  meal        Meal @relation(references: [id], fields: [mealId])
 }
 
 model Food {
@@ -33,6 +60,7 @@ model Food {
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int
+  mealItems  MealItem[]
 }
 
 model AminoAcid {
