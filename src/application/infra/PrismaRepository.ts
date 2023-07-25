@@ -1,3 +1,5 @@
+import { HandleError } from "@/errors/HandleError"
+
 interface Search<Identificator> {
   where: { id: Identificator },
 }
@@ -20,7 +22,11 @@ export class PrismaRepository<Type, Identificator> {
   }
 
   async getById(id: Identificator) {
-    return await this.model.findUnique({ where: { id } })
+    try {
+      return await this.model.findUnique({ where: { id } })
+    } catch (error) {
+      throw new HandleError('Internal server error', 500)
+    }
   }
 
   async update(id: Identificator, data: Partial<Type>) {
