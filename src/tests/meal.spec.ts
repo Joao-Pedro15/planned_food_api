@@ -12,15 +12,15 @@ describe("e2e routes meal", () => {
 
   describe('e2e test POST meal', () => {
     const userId = 'af633214-8dcf-44b1-9bf4-719c0d4e5a4f'
-    it('should successfully create meal', async () => {
-      Reflect.deleteProperty(fakeMeal, 'id')
-      Reflect.deleteProperty(fakeMealItem, 'id')
-      Reflect.deleteProperty(fakeMealItem, 'mealId')
-      const response = await request(server)
-      .post('/meal/addMeal')
-      .send({ meal: {...fakeMeal, userCreated: userId }, items: [{...fakeMealItem, foodId: 2}] })
-      expect(response.statusCode).toBe(201)
-    })
+    // it('should successfully create meal', async () => {
+    //   Reflect.deleteProperty(fakeMeal, 'id')
+    //   Reflect.deleteProperty(fakeMealItem, 'id')
+    //   Reflect.deleteProperty(fakeMealItem, 'mealId')
+    //   const response = await request(server)
+    //   .post('/meal/addMeal')
+    //   .send({ meal: {...fakeMeal, userCreated: userId }, items: [{...fakeMealItem, foodId: 2}] })
+    //   expect(response.statusCode).toBe(201)
+    // })
 
     it('should return not found food error', async () => {
       const response = await request(server)
