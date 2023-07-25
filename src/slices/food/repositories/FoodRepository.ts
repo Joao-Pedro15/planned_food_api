@@ -12,4 +12,8 @@ export class FoodRepository implements IFoodRepository {
     return await this.repository.get(query)
   }
 
+  async getById(id: number): Promise<Food | null> {
+    return await this.repository.getById(id)
+  }
+
 }

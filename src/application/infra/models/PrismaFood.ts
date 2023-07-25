@@ -22,5 +22,4 @@ export class PrismaFood extends PrismaRepository<Food, number> {
       skip: offSet ? Number(offSet) : 0
     })
   }
-
 }
