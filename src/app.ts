@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import './config/module-alias'
-import { food, user } from './routes/index'
+import { food, meal, user } from './routes/index'
 import express from 'express'
 import cors from 'cors'
 import { Prisma } from './application/infra/database/prisma'
@@ -20,5 +20,6 @@ app.get('/teste', async (_, response) => {
 
 app.use('/user', user.default)
 app.use('/food', food.default)
+app.use('/meal', meal.default)
 
 export default app
