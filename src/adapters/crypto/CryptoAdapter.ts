@@ -12,7 +12,7 @@ export class CryptoAdapter implements Encrypter, HashComparer, TokenDecrypter, T
     return bcrypt.compareSync(password, hashedText);
   }
 
-  async decrypt(value: string, secret: string): Promise<string> {
+  decrypt(value: string, secret: string): string {
     return jwt.verify(value, secret) as any;
   }
 
