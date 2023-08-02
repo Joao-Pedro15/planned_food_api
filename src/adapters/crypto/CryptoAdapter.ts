@@ -16,7 +16,7 @@ export class CryptoAdapter implements Encrypter, HashComparer, TokenDecrypter, T
     return jwt.verify(value, secret) as any;
   }
 
-  async generate(id: string, secret: string, timmer: string | number = '2 days'): Promise<string> {
+  generate(id: string, secret: string, timmer: string | number = '2 days'): string {
     return jwt.sign({ id }, secret, { expiresIn: timmer })  
   }
 }
