@@ -11,6 +11,17 @@ describe('e2e routes from user', () => {
     server.close(done)
   })
 
+  describe('e2e test TOKEN user', () => {
+    test("should get token user", async () => {
+      const idUser = 'af633214-8dcf-44b1-9bf4-719c0d4e5a4f'
+      const response = await request(server)
+      .post(`/user/token/${idUser}`)
+
+      expect(response.statusCode).toBe(200)
+      expect(response.ok).toBeTruthy()
+    })
+  })
+
   describe('e2e test POST user', () => {
     test("should return error email already in database", async () => {
       Reflect.deleteProperty(fakeUser, 'id')
