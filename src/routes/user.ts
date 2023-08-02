@@ -2,6 +2,7 @@ import AddUserController from "@/application/controller/user/addUser/AddUserCont
 import GetTokenController from "@/application/controller/user/getToken/GetTokenController";
 import GetUserByIdController from "@/application/controller/user/getUserById/GetUserByIdController";
 import LoginController from "@/application/controller/user/login/LoginController";
+import Authenticate from "@/middlewares/auth/Authenticate";
 GetUserByIdController
 
 import { Router } from "express";
@@ -13,6 +14,6 @@ router.post('/login', LoginController.handle)
 
 router.post('/token/:id', GetTokenController.handle)
 
-router.get('/getUser/:id', GetUserByIdController.handle)
+router.get('/getUser/:id', Authenticate, GetUserByIdController.handle)
 
 export default router
