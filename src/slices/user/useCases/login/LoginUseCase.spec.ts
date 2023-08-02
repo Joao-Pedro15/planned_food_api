@@ -14,7 +14,7 @@ describe('testing login useCase', () => {
     crypto = mock()
     userRepository.getByEmail.mockResolvedValue(fakeUser)
     crypto.compare.mockReturnValue(true)
-    crypto.generate.mockResolvedValue('myToken')
+    crypto.generate.mockReturnValue('myToken')
   })
 
   beforeEach(() => {
