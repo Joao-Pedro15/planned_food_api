@@ -6,7 +6,7 @@ class GetTokenController {
     const id = request.params.id
     try {
         const token = await factory.build(id)
-        return response.status(200).json(token)
+        return response.status(200).json({token_access: token})
       } catch (error) {
         return response.status(error.statusCode).json({
           message: error.message,
