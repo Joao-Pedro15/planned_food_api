@@ -30,7 +30,7 @@ export class Authenticate {
       request.userId = decoded.userId; // Define o userId no objeto Request para uso posterior
       next(); // Chama a próxima função/middleware na pilha de execução
     } catch (error) {      
-      return response.status(401).json({ error: 'Token inválido', statusCode: 401 });
+      return response.status(401).json({ error: 'Token inválido'+error, statusCode: 401 });
     }
   } 
 }

@@ -1,7 +1,11 @@
 import { fakeUser } from '@/slices/user/useCases/addUser/AddUserUseCase.spec'
 import app from '../app'
 import request from 'supertest'
+import { GetTokenUseCase } from '@/slices/user/useCases/getToken/GetTokenUseCase';
+import { CryptoAdapter } from '@/adapters';
 let server;
+let token: string
+let userId = 'af633214-8dcf-44b1-9bf4-719c0d4e5a4f'
 
 describe('e2e routes from user', () => {
   beforeAll(done => {
@@ -9,6 +13,9 @@ describe('e2e routes from user', () => {
   })
   afterAll(done => {
     server.close(done)
+  })
+  beforeEach(() => {
+    token = new CryptoAdapter().generate(userId, 'mySecret')
   })
 
   describe('e2e test TOKEN user', () => {
@@ -38,6 +45,7 @@ describe('e2e routes from user', () => {
     test('should return user get by id successfully', async () => {
       const response = await request(server)
       .get(`/user/getUser/${'af633214-8dcf-44b1-9bf4-719c0d4e5a4f'}`)
+      .set('Authorization', `Bearer ${token}`)
       expect(response.body).toHaveProperty('email')
       expect(response.status).toBe(200)
     })
@@ -45,6 +53,7 @@ describe('e2e routes from user', () => {
     test("should return error not found user in database",  async () => {
       const response = await request(server)
       .get(`/user/getUser/${fakeUser.id}`)
+      .set('Authorization', `Bearer ${token}`)
       expect(response.notFound).toBeTruthy()
       expect(response.status).toBe(404)
       expect(JSON.parse(response.text).message).toBe('not found user')
