@@ -1,9 +1,16 @@
 export default {
   post: {
-    tags: ['Rotas post de user'],
+    tags: ['Rota de autenticação'],
     description: 'Rotas post de user',
     operationId: 'createAuth',
-    parameters: ["id"],
+    parameters: [
+      {
+        name: 'id',
+        in: 'path',
+        description: 'id do usuário',
+        required: true
+      }
+    ],
     responses: {
       200: {
         description: 'generate token successfully!',

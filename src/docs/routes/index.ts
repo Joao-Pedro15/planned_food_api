@@ -1,5 +1,7 @@
 import user from './user'
 
 export default {
-  ...user
+  "/user/token/{id}":{
+    ...user
+  }
 }
