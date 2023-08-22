@@ -1,6 +1,5 @@
 import { User } from "@prisma/client";
 import { AddUserRepository, DeleteUserRepository, GetUserRepository, UpdateUserRepository } from "./contracts";
-import { GetResult } from "@prisma/client/runtime";
 
 export interface IUserRepository extends AddUserRepository, GetUserRepository, UpdateUserRepository, DeleteUserRepository {}
 
@@ -16,6 +15,10 @@ export class UserRepository implements IUserRepository{
 
   async getByEmail(email: string): Promise<User> {
     return await this.repository.getByEmail(email) 
+  }
+
+  async get(): Promise<User[] | null> {
+    return await this.repository.get()
   }
 
   async update(id: string, data: Partial<User>): Promise<any> {
