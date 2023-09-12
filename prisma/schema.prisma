@@ -15,8 +15,21 @@ model User {
   name String
   email String
   password String
+  nutritionGoals NutritionGoals[]
   ucMeal  Meal[] @relation("ucMeal")
   uuMeal  Meal[] @relation("uuMeal")
+}
+
+model NutritionGoals {
+  id String @id @default(uuid())
+  userId String
+  calories Int
+  fatPercentage Int
+  proteinPercentage Int
+  carboPercentage Int
+  status String   
+  desiredWeight Int?
+  user User @relation(references: [id], fields: [userId])
 }
 
 model Category {
