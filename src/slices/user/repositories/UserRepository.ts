@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { NutritionGoals, User } from "@prisma/client";
 import { AddUserRepository, DeleteUserRepository, GetUserRepository, UpdateUserRepository } from "./contracts";
 
 export interface IUserRepository extends AddUserRepository, GetUserRepository, UpdateUserRepository, DeleteUserRepository {}
@@ -9,7 +9,7 @@ export class UserRepository implements IUserRepository{
     return await this.repository.add(data)
   }
 
-  async getById(id: string): Promise<User> {
+  async getById(id: string): Promise<User&{nutritionGoals: NutritionGoals | null}> {
     return await this.repository.getById(id)
   }
 

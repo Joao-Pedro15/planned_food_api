@@ -11,7 +11,11 @@ export class PrismaUser extends PrismaRepository<User, string> {
   async getByEmail(email: string) {
     return await Prisma.user.findFirst({
       where: { email },
-      distinct: "name"
+      include:{
+        nutritionGoals: {
+          where: { status: 'Active' }
+        }
+      }
     })
   }
 
