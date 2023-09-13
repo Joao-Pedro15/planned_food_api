@@ -13,6 +13,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
 
+app.use(async (request, response, next) => {
+  next(response.status(400).json({ message: 'Router do not exists', statusCode: 400 }))
+})
+
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.get("/health", (request, response) => response.status(200).send('hello world'))
