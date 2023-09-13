@@ -2,14 +2,15 @@ import { MockProxy, mock } from "jest-mock-extended"
 import { AddUserUseCase } from "./AddUserUseCase"
 import { Encrypter } from "@/adapters/protocols"
 import { IUserRepository } from "../../repositories/UserRepository"
-import { User } from "@prisma/client"
+import { NutritionGoals, User } from "@prisma/client"
 import { randomUUID } from "crypto"
 
-export const fakeUser: User = {
+export const fakeUser: User & { nutritionGoals: NutritionGoals | null } = {
   id: randomUUID(),
   email: "fakeEmail@gmail.com",
   name: "fake_name",
-  password: "fake_password"
+  password: "fake_password",
+  nutritionGoals: null
 }
 
 describe('testing useCase adduser', () => {
