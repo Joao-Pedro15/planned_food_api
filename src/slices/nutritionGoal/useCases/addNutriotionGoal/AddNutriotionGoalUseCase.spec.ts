@@ -1,6 +1,6 @@
 import { GetUserRepository } from "@/slices/user/repositories/contracts"
 import { MockProxy, mock } from "jest-mock-extended"
-import { AddNutriotionGoalRepository } from "../../repositories/contracts"
+import { AddNutritionGoalRepository } from "../../repositories/contracts"
 import { AddNutritionGoalUseCase } from "./AddNutriotionGoalUseCase"
 import { fakeUser } from "@/slices/user/useCases/addUser/AddUserUseCase.spec"
 import { NutritionGoals } from "@prisma/client"
@@ -18,7 +18,7 @@ const fakeNutriotionGoals: NutritionGoals = {
 
 describe('testing useCASe AddnutritionGoal', () => {
  let userRepository: MockProxy<GetUserRepository>
- let nutritionGoalRepository: MockProxy<AddNutriotionGoalRepository>
+ let nutritionGoalRepository: MockProxy<AddNutritionGoalRepository>
  let testInstance: AddNutritionGoalUseCase
 
  beforeAll(() => {

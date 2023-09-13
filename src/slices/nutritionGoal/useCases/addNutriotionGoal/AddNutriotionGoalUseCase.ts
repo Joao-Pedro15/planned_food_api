@@ -1,12 +1,12 @@
 import { GetUserRepository } from "@/slices/user/repositories/contracts";
-import { AddNutriotionGoalRepository } from "../../repositories/contracts";
+import { AddNutritionGoalRepository } from "../../repositories/contracts";
 import { NutritionGoals } from "@prisma/client";
 import { HandleError } from "@/errors/HandleError";
 
 export class AddNutritionGoalUseCase {
     constructor(
         private userRepository: GetUserRepository,
-        private nutritionGoalRepository: AddNutriotionGoalRepository
+        private nutritionGoalRepository: AddNutritionGoalRepository
     ) { }
 
     async execute(data: NutritionGoals) {

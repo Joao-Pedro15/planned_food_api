@@ -1,9 +1,9 @@
 import { NutritionGoals } from "@prisma/client";
-import { AddNutriotionGoalRepository } from "./contracts";
+import { AddNutritionGoalRepository } from "./contracts";
 
-export abstract class NutriotionGoalRepository  implements
-AddNutriotionGoalRepository {
-  constructor(private repository: AddNutriotionGoalRepository) {} 
+export class NutritionGoalRepository implements
+  AddNutritionGoalRepository {
+  constructor(private repository: AddNutritionGoalRepository) { }
 
   async add(data: NutritionGoals): Promise<void> {
     return await this.repository.add(data)
