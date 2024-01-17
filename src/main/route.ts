@@ -9,6 +9,9 @@ export const adaptRoute = (controller: Controller) => {
    body, params, headers, query
   }
   const { statusCode, data } = await controller.handle(httpRequest)
-  response.status(statusCode).json(data)
+  if(data instanceof Error) {
+    return response.status(statusCode).json({ data: data.message, name: data.name,  stack:data.stack })
+  }
+  return response.status(statusCode).json(data)
  }
 }
