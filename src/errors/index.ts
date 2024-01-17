@@ -40,13 +40,11 @@ export class UnauthorizedError extends Error {
  }
  
  export class EmailInUseError extends Error {
-  mensagem: string
   constructor() {
-   super(`The received email is already in use`)
-   this.mensagem = `The received email is already in use`
-   this.name = 'EmailInUseError'
+    super(`The received email is already in use`)
+    this.name = 'EmailInUseError'
   }
- }
+}
  
  export class AccessDeniedError extends Error {
   constructor() {
