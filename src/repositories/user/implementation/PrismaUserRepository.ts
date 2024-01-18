@@ -1,7 +1,8 @@
-import { Prisma } from "@/application/infra/database/prisma"
+import { Prisma } from "@/infra/prisma"
 import { User } from "@/domain/user/User"
+import { UserRepository } from "../UserRepository"
 
-export class PrismaUserRepository {
+export class PrismaUserRepository implements UserRepository {
   private readonly prisma = Prisma
   constructor() {}
 
@@ -12,5 +13,9 @@ export class PrismaUserRepository {
   async add(data: User) {
     return await this.prisma.user.create({ data })
   } 
+
+  async get() {
+    return await this.prisma.user.findMany()
+  }
 
 }

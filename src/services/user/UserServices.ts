@@ -19,4 +19,9 @@ export class UserServices {
     return await this.repository.add({...data, password: hashPassword})
   }
 
+  async get() {
+    const users = await this.repository.get()
+    return users.map(user => ({...user, password: null}))
+  }
+
 }
