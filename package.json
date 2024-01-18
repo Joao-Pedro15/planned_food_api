@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules --respawn src/server/index.ts",
-    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --detectOpenHandles"
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --detectOpenHandles",
+    "build": "tsc",
+    "start": "node ./dist/server/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,6 +18,9 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Joao-Pedro15/planned_food_api/issues"
+  },
+  "_moduleAliases": {
+    "@": "dist"
   },
   "homepage": "https://github.com/Joao-Pedro15/planned_food_api#readme",
   "dependencies": {

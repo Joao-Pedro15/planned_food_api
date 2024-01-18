@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import './config/module-alias'
 import express from 'express'
-import { expressConfig } from '@/config/express-config'
+import { expressConfig } from './config/express-config'
 
 const app = express()
 
