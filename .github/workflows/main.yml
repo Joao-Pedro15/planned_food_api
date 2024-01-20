@@ -13,8 +13,6 @@ jobs:
           uses: actions/setup-node@v3
           with:
             node-version: 18
-            cache: "npm"
-            cache-dependency-path: ./package-lock.json
         - name: Executando instalação NPM
           run:  npm install
         - name: Set up Environment Variables
