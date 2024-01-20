@@ -7,23 +7,23 @@ jobs:
     CI:  
       runs-on: ubuntu-latest
       steps:  
-        - name: Obter repositorio
+        - name: config repository
           uses: actions/checkout@v3.5.2
-        - name: Set up Node.js
+        - name: set up Node.js
           uses: actions/setup-node@v3
           with:
             node-version: 18
-        - name: Executando instalação NPM
+        - name: install NPM packages
           run:  npm install
-        - name: Set up Environment Variables
+        - name: set up Environment Variables
           run: |
             echo "DATABASE_PROD=${{ secrets.DATABASE_PROD }}" >> $GITHUB_ENV
             echo "TS_NODE_ENV=${{ secrets.TS_NODE_ENV }}" >> $GITHUB_ENV
-        - name: DATABASE SET
+        - name: migrations prisma database
           run: npx prisma migrate dev
-        - name:  run tests
+        - name: running script tests
           run: npm t
-        - name: BUILD
+        - name: running scrupt build
           run: npm run build
               
     
