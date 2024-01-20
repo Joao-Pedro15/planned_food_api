@@ -1,0 +1,34 @@
+name: CI
+on: 
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+jobs:  
+    CI:  
+      runs-on: ubuntu-latest
+      steps:  
+        - name: Obter repositorio
+          uses: actions/checkout@v3.5.2
+        - name: Set up Node.js
+          uses: actions/setup-node@v3
+          with:
+            node-version: 18
+            cache: "npm"
+            cache-dependency-path: ./package-lock.json
+        - name: Executando instalação NPM
+          run:  npm install
+        - name: Set up Environment Variables
+          run: |
+            echo "DATABASE_PROD=${{ secrets.DATABASE_PROD }}" >> .env
+            echo "TS_NODE_ENV=${{ secrets.TS_NODE_ENV }}" >> .env
+            env:
+              DATABASE_PROD: ${{ secrets.DATABASE_PROD }}
+              TS_NODE_ENV: ${{ secrets.TS_NODE_ENV }}
+        - name: DATABASE SET
+          run: npx prisma migrate dev
+        - name:  run tests
+          run: npm t
+        - name: BUILD
+          run: npm run build
+              
+    
