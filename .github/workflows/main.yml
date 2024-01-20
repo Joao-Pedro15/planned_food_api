@@ -19,9 +19,6 @@ jobs:
           run: |
             echo "DATABASE_PROD=${{ secrets.DATABASE_PROD }}" >> $GITHUB_ENV
             echo "TS_NODE_ENV=${{ secrets.TS_NODE_ENV }}" >> $GITHUB_ENV
-            env:
-              DATABASE_PROD: ${{ secrets.DATABASE_PROD }}
-              TS_NODE_ENV: ${{ secrets.TS_NODE_ENV }}
         - name: DATABASE SET
           run: npx prisma migrate dev
         - name:  run tests
