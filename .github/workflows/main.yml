@@ -23,7 +23,7 @@ jobs:
         run: npx prisma migrate deploy
       - name: running script tests
         run: npm t
-      - name: running scrupt build
+      - name: running script build
         run: npm run build
   CD:
     runs-on: ubuntu-latest
@@ -32,6 +32,6 @@ jobs:
       - name: "Deploy to Azure Web App"
         uses: azure/webapps-deploy@v2
         with:
-          app-name: "planned-food-api"
+          app-name: planned-food-api
           package: .
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_7338d1ebff2944b4a48d5815e77121ae }}
