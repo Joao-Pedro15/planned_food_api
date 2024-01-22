@@ -10,7 +10,7 @@ jobs:
       - name: config repository
         uses: actions/checkout@v3.5.2
       - name: set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
       - name: install NPM packages
@@ -28,16 +28,10 @@ jobs:
   CD:
     runs-on: ubuntu-latest
     needs: CI
-    environment:
-      name: "production"
-      url: planned-food-api.azurewebsites.net
-
     steps:
       - name: "Deploy to Azure Web App"
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: "planned-food-api"
-          slot-name: "production"
           package: .
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_7338d1ebff2944b4a48d5815e77121ae }}
