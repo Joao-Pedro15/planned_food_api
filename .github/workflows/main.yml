@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: config repository
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v2
       - name: set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v1
         with:
-          node-version: 18
+          node-version: '18.x'
       - name: install NPM packages
         run: npm install
       - name: set up Environment Variables
@@ -30,11 +30,11 @@ jobs:
     needs: CI
     steps:
       - name: config repository
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v2
       - name: set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v1
         with:
-          node-version: 18
+          node-version: '18.x'
       - name: install NPM packages
         run: npm install
       - name: set up Environment Variables
