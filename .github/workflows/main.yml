@@ -24,3 +24,26 @@ jobs:
         run: |
           npm install
           npm run build
+  CD:
+    runs-on: ubuntu-latest
+    needs: CI
+    steps:
+    - name: config repository
+      uses: actions/checkout@v2
+      
+    - name: set up Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: install NPM packages and run build
+      run: |
+        npm install
+        npm run build
+
+    - name: "Deploy to Azure Web App"
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_7338d1ebff2944b4a48d5815e77121ae }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
