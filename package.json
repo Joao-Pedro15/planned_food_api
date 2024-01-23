@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules --respawn src/server/index.ts",
+    "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules --respawn src/index.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --detectOpenHandles",
     "build": "tsc",
-    "start": "node ./dist/server/index.js"
+    "start": "node ./dist/index.js"
   },
   "repository": {
     "type": "git",
