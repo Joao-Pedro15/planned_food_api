@@ -1,5 +1,5 @@
 import { Express, json, urlencoded } from "express";
-import { allRoutes } from '@/routes/index'
+//import { allRoutes } from '@/routes/index'
 import cors from 'cors'
 
 export function expressConfig(app:Express) {
@@ -7,10 +7,10 @@ export function expressConfig(app:Express) {
   app.use(urlencoded({ extended: true }))
   app.use(cors())
 
-  Object.keys(allRoutes).forEach((route) => {
+  // Object.keys(allRoutes).forEach((route) => {
 
-    app.use(`/${route}`, allRoutes[route])
+  //   app.use(`/${route}`, allRoutes[route])
 
-  })
+  // })
 
 }
