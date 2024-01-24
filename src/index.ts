@@ -10,9 +10,10 @@ app.use(express.urlencoded({ extended: true }))
 
 app.get("/health", (request, response) => response.status(200).send('hello world'))
 
+const PORT = process.env.PORT || 8080
 
-app.listen(3000, () => {
-  console.log('server running in port 3000')
+app.listen(PORT, () => {
+  console.log('server running in port', PORT)
 })
 
 
