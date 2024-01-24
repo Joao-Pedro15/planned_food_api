@@ -32,6 +32,12 @@ jobs:
       - name: config repository
         uses: actions/checkout@v2
 
+      - name: add environments
+        run: |
+          touch .env
+          echo DATABASE_PROD=${{ secrets.DATABASE_PROD }} >> .env
+          echo TS_NODE_ENV=${{ secrets.TS_NODE_ENV }} >> .env
+
       - name: set up Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
@@ -40,6 +46,7 @@ jobs:
       - name: install NPM packages and run build
         run: |
           npm install
+          npx prisma migrate deploy
           npm run build
 
       - name: "Deploy to Azure Web App"
