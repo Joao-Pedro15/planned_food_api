@@ -6,7 +6,7 @@ export class UserServices {
 
   constructor(
     private readonly repository: UserRepository
-  ) {}
+  ) { }
 
 
   async getByEmail(email: string) {
@@ -16,12 +16,17 @@ export class UserServices {
 
   async add(data: User) {
     const hashPassword = hashSync(data.password, 12)
-    return await this.repository.add({...data, password: hashPassword})
+    return await this.repository.add({ ...data, password: hashPassword })
   }
 
   async get() {
     const users = await this.repository.get()
-    return users.map(user => ({...user, password: null}))
+    return users.map(user => ({ ...user, password: null }))
+  }
+
+  async getById(id: string) {
+    const user = await this.repository.getById(id)
+    return { ...user, password: null }
   }
 
 }

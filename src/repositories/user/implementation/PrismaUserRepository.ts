@@ -4,18 +4,22 @@ import { UserRepository } from "../UserRepository"
 
 export class PrismaUserRepository implements UserRepository {
   private readonly prisma = Prisma
-  constructor() {}
+  constructor() { }
 
-  async getByEmail(email:string) {
+  async getByEmail(email: string) {
     return await this.prisma.user.findFirst({ where: { email } })
   }
 
   async add(data: User) {
     return await this.prisma.user.create({ data })
-  } 
+  }
 
   async get() {
     return await this.prisma.user.findMany()
+  }
+
+  async getById(id: string): Promise<User> {
+    return await this.prisma.user.findUnique({ where: { id } })
   }
 
 }
