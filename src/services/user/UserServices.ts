@@ -11,7 +11,7 @@ export class UserServices {
 
   async getByEmail(email: string) {
     const user = await this.repository.getByEmail(email)
-    return user
+    return new User(user)
   }
 
   async add(data: User) {
@@ -21,12 +21,12 @@ export class UserServices {
 
   async get() {
     const users = await this.repository.get()
-    return users.map(user => ({ ...user, password: null }))
+    return users.map(user => (new User({ ...user, password: null })))
   }
 
   async getById(id: string) {
     const user = await this.repository.getById(id)
-    return { ...user, password: null }
+    return new User({ ...user, password: null })
   }
 
 }
