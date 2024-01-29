@@ -18,8 +18,8 @@ export class PrismaUserRepository implements UserRepository {
     return await this.prisma.user.findMany()
   }
 
-  async getById(id: string): Promise<User> {
-    return await this.prisma.user.findUnique({ where: { id } })
+  async getById(id: string) {
+    return await this.prisma.user.findUnique({ where: { id }, include: { nutritionGoals: true } })
   }
 
 }
