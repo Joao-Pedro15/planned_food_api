@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "category": "node payload/scripts/category.js",
+    "food": "node payload/scripts/food.js",
+    "nutrients": "node payload/scripts/nutrients.js",
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules --respawn src/server/index.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --detectOpenHandles",
     "build": "tsc",
