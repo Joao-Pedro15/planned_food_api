@@ -1,4 +1,4 @@
-const activyList = {
+export const activyList = {
  'sedentary': 1.2,
  'lowActivity': 1.375,
  'mediumActivity': 1.55,
