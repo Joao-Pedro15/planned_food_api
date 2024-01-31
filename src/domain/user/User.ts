@@ -7,13 +7,18 @@ export class User {
   public name: string
   public email: string
   public password: string
+  public height: number
+  public weight: number
+  public age: number
   public nutritionalGoals: NutritionGoals[]
   constructor(data: UserDTO) {
     this.id = data.id ?? randomUUID()
     this.name = data.name
     this.email = data.email
     this.password = data.password
+    this.age = data.age
+    this.height = data.height
+    this.weight = data.weight
     this.nutritionalGoals = data.nutriotionalGoals ?? []
-
   }
 }
