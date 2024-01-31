@@ -14,7 +14,7 @@ describe('testing usecase metabolic', () => {
   it('should keep target metabolic rate and activity medium', () => {
    const base = new BaseMetabolicRate({ ...baseProps, activity: 'mediumActivity' })
    const result = base.calc('keep')
-   expect(result).toEqual('0')
+   expect(result).toEqual('3073.960')
 
   })
 
