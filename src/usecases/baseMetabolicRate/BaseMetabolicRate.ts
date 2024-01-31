@@ -31,26 +31,26 @@ export class BaseMetabolicRate {
 
   if (this.gender == 'female') {
 
-   calories = this.formula(447.593, 9.247, 3.098, 4.330) * this.activity
+   calories = this.formula(665, 9.6, 1.8, 4.7) * this.activity
 
-   return this.dailyGoal(target, calories)
+   return this.dailyGoal(target, calories).toFixed(3)
 
   }
 
   if (this.gender == 'male') {
 
-   calories = this.formula(88.362, 13.397, 4.799, 5.677) * this.activity
+   calories = this.formula(66, 13.7, 5, 6.8) * this.activity
 
-   return this.dailyGoal(target, calories)
+   return this.dailyGoal(target, calories).toFixed(3)
 
   }
 
-  return calories
+  return calories.toFixed(3)
 
  }
 
  private formula(a: number, b: number, c: number, d: number) {
-  return (a + (b * this.weight) + (c * this.height)) - (d * this.age)
+  return a + (b * this.weight) + (c * this.height) - (d * this.age)
  }
 
  private dailyGoal(target: 'up' | 'down' | 'keep', calories: number) {
