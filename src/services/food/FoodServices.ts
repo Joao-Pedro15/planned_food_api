@@ -1,3 +1,4 @@
+import { Food } from "@/domain/food/Food";
 import { FoodRepository } from "@/repositories";
 
 export class FoodServices {
@@ -7,7 +8,7 @@ export class FoodServices {
 
     async get() {
         const foods = await this.foodRepository.get()
-        return foods
+        return foods.map(food => new Food(food, 1))
     }
 
 }

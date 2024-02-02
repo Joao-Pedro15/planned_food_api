@@ -6,7 +6,15 @@ export class PrismaFoodRepository implements FoodRepository {
     constructor(){}
 
     async get() {
-        return await this.prisma.food.findMany()
+        return await this.prisma.food.findMany({
+            include:{
+                nutrients: true,
+                category:{
+                    select:{
+                        name: true
+                    }
+                }
+            }
+        })
     }
-
 }
