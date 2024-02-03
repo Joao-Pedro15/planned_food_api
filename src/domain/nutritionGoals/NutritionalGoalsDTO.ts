@@ -1,10 +1,10 @@
 export interface NutritionGoalsDTO {
  id?: string
  userId: string
- calories: string
- fatPercentage: Number
- proteinPercentage: Number
- carboPercentage: Number
+ calories: number
+ fatPercentage: number
+ proteinPercentage: number
+ carboPercentage: number
  status?: 'Active' | 'Inactive'
- desiredWeight: Number | null
+ desiredWeight: number | null
 }
