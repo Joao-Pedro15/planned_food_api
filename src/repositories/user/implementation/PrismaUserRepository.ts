@@ -11,7 +11,21 @@ export class PrismaUserRepository implements UserRepository {
   }
 
   async add(data: User) {
-    return await this.prisma.user.create({ data })
+    return await this.prisma.user.create({
+      data: {
+        age: 1,
+        email: data.email,
+        gender: data.gender,
+        height: data.height,
+        name: data.name,
+        password: data.password,
+        weight: data.weight,
+        id: data.id,
+        nutritionGoals: {
+          createMany: { data: data.nutritionalGoals }
+        }
+      }
+    })
   }
 
   async get() {

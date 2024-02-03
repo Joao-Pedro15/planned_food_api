@@ -10,6 +10,7 @@ export class User {
   public height: number
   public weight: number
   public age: number
+  public gender: string
   public nutritionalGoals: NutritionGoals[]
   constructor(data: UserDTO) {
     this.id = data.id ?? randomUUID()
@@ -18,6 +19,7 @@ export class User {
     this.password = data.password
     this.age = data.age
     this.height = data.height
+    this.gender = data.gender
     this.weight = data.weight
     this.nutritionalGoals = data.nutriotionalGoals ?? []
   }

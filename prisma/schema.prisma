@@ -7,29 +7,33 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-   url      = env("DATABASE_PROD")
+  url      = env("DATABASE_PROD")
 }
 
 model User {
-  id String @id @default(uuid())
-  name String
-  email String
-  password String
+  id             String           @id @default(uuid())
+  name           String
+  email          String
+  age            Int
+  weight         Float
+  height         Float
+  gender         String
+  password       String
   nutritionGoals NutritionGoals[]
-  ucMeal  Meal[] @relation("ucMeal")
-  uuMeal  Meal[] @relation("uuMeal")
+  ucMeal         Meal[]           @relation("ucMeal")
+  uuMeal         Meal[]           @relation("uuMeal")
 }
 
 model NutritionGoals {
-  id String @id @default(uuid())
-  userId String
-  calories Int
-  fatPercentage Int
+  id                String @id @default(uuid())
+  userId            String
+  calories          Int
+  fatPercentage     Int
   proteinPercentage Int
-  carboPercentage Int
-  status String   
-  desiredWeight Int?
-  user User @relation(references: [id], fields: [userId])
+  carboPercentage   Int
+  status            String
+  desiredWeight     Int?
+  user              User   @relation(references: [id], fields: [userId])
 }
 
 model Category {
@@ -39,28 +43,27 @@ model Category {
 }
 
 model Meal {
-  id String @id @default(uuid())
-  name String
-  date  DateTime
-  items MealItem[]
-  createdAt  DateTime @default(now())
-  updatedAt DateTime?
+  id          String     @id @default(uuid())
+  name        String
+  date        DateTime
+  items       MealItem[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime?
   userCreated String
   userUpdated String?
-  createdUser User @relation(name: "ucMeal", references: [id], fields: [userCreated])
-  updatedUser User? @relation(name: "uuMeal", references: [id], fields: [userUpdated])
-
+  createdUser User       @relation(name: "ucMeal", references: [id], fields: [userCreated])
+  updatedUser User?      @relation(name: "uuMeal", references: [id], fields: [userUpdated])
 }
 
 model MealItem {
-  id    String @id @default(uuid())
-  foodId  Int
-  mealId   String
-  quantity    Float
-  createdAt DateTime @default(now())
+  id        String    @id @default(uuid())
+  foodId    Int
+  mealId    String
+  quantity  Float
+  createdAt DateTime  @default(now())
   updatedAt DateTime?
-  food        Food @relation(references: [id], fields: [foodId])
-  meal        Meal @relation(references: [id], fields: [mealId])
+  food      Food      @relation(references: [id], fields: [foodId])
+  meal      Meal      @relation(references: [id], fields: [mealId])
 }
 
 model Food {
@@ -71,7 +74,7 @@ model Food {
   fattyAcids FattyAcid?
   nutrients  Nutrient?
 
-  category   Category @relation(fields: [categoryId], references: [id])
+  category   Category   @relation(fields: [categoryId], references: [id])
   categoryId Int
   mealItems  MealItem[]
 }
@@ -110,25 +113,25 @@ model FattyAcid {
   monounsaturated Float
   polyunsaturated Float
 
-  twelveZero      Float? 
-  fourteenZero    Float? 
-  fourteenOne     Float? 
-  sixteenZero     Float? 
-  sixteenOne      Float? 
-  eighteenZero    Float? 
-  eighteenOne     Float? 
+  twelveZero      Float?
+  fourteenZero    Float?
+  fourteenOne     Float?
+  sixteenZero     Float?
+  sixteenOne      Float?
+  eighteenZero    Float?
+  eighteenOne     Float?
   eighteenOneT    Float?
-  eighteenTwoN6   Float? 
+  eighteenTwoN6   Float?
   eighteenTwoT    Float?
   eighteenThreeN3 Float?
-  twentyZero      Float? 
-  twentyOne       Float? 
-  twentyFour      Float? 
-  twentyFive      Float? 
-  twentyTwoZero   Float? 
-  twentyTwoFive   Float? 
-  twentyTwoSix    Float? 
-  twentyFourZero  Float? 
+  twentyZero      Float?
+  twentyOne       Float?
+  twentyFour      Float?
+  twentyFive      Float?
+  twentyTwoZero   Float?
+  twentyTwoFive   Float?
+  twentyTwoSix    Float?
+  twentyFourZero  Float?
 
   @@map("fatty_acids")
 }
