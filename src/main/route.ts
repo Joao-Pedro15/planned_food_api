@@ -4,9 +4,9 @@ import { Request, Response } from 'express'
 
 export const adaptRoute = (controller: Controller) => {
   return async (request: Request, response: Response) => {
-    const { body, params, query, headers } = request
+    const { body, params, query, headers, userLogged } = request
     const httpRequest: HttpRequest = {
-      body, params, headers, query
+      body, params, headers, query, userLogged
     }
     const { statusCode, data } = await controller.handle(httpRequest)
     if (data instanceof Error) {

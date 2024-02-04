@@ -6,7 +6,7 @@ import {
 
 
 export type HttpResponse<T = any> = { statusCode: number, data: T }
-export type HttpRequest<T = any> = { body?: T, headers?: T, params?: T, query?: T }
+export type HttpRequest<T = any> = { body?: T, headers?: T, params?: T, query?: T, userLogged: UserRequest | null }
 
 export const ok = <T = any>(data: T): HttpResponse<T> => ({ data, statusCode: 200 })
 export const created = <T = any>(data: T): HttpResponse<T> => ({ statusCode: 201, data })

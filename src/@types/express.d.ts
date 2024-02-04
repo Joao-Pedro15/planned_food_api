@@ -1,4 +1,4 @@
-interface User {
+interface UserRequest {
   id: string
   name: string
   email: string
@@ -7,6 +7,6 @@ interface User {
 
 declare namespace Express {
   export interface Request {
-    userLogged: User
+    userLogged: UserRequest
   }
 }
