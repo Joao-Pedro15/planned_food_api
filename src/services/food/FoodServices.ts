@@ -11,4 +11,9 @@ export class FoodServices {
         return foods.map(food => new Food(food, 1))
     }
 
+    async getById(id: number) {
+        const food = await this.foodRepository.getById(id)
+        return new Food(food) ?? null
+    }
+
 }

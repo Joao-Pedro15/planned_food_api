@@ -14,4 +14,6 @@ export interface FoodWithNutrients extends Food {
 
 export interface FoodRepository {
     get(query: QueryFood): Promise<FoodWithNutrients[]>
+    getById(id: number): Promise<FoodWithNutrients | null>
+
 }

@@ -25,4 +25,14 @@ export class PrismaFoodRepository implements FoodRepository {
             }
         })
     }
+
+    async getById(id: number) {
+        return await this.prisma.food.findUnique({
+            where: { id },
+            include: {
+                nutrients: true,
+                category: { select: { name: true } }
+            }
+        })
+    }
 }
