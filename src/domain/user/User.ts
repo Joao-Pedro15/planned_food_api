@@ -13,7 +13,7 @@ export class User {
   public gender: string
   public nutritionalGoals: NutritionGoals[]
   constructor(data: UserDTO) {
-    this.id = data.id ?? randomUUID()
+    this.id = data?.id ?? randomUUID()
     this.name = data.name
     this.email = data.email
     this.password = data.password

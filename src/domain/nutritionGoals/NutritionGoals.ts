@@ -10,7 +10,6 @@ export class NutritionGoals {
  public proteinPercentage: number
  public carboPercentage: number
  public status: 'Active' | 'Inactive'
- public desiredWeight: number | null
 
  constructor(data: NutritionGoalsDTO) {
   this.id = data.id ?? randomUUID()
@@ -20,6 +19,5 @@ export class NutritionGoals {
   this.carboPercentage = data.carboPercentage
   this.fatPercentage = data.fatPercentage
   this.proteinPercentage = data.proteinPercentage
-  this.desiredWeight = data.desiredWeight
  }
 }

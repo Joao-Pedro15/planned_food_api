@@ -6,6 +6,7 @@ import { Controller } from "@/main/controller";
 import { HttpRequest, HttpResponse, badRequest, forbidden, ok } from "@/main/http";
 import { UserServices } from "@/services/user/UserServices";
 import { BaseMetabolicRate } from "@/usecases/baseMetabolicRate/BaseMetabolicRate";
+import { MacronutrienteRate } from "@/usecases/macronutrientRate/MacronutrientRate";
 
 export class SignupController extends Controller {
   constructor(
@@ -24,28 +25,33 @@ export class SignupController extends Controller {
     if (userExist) {
       return forbidden(new EmailInUseError())
     }
+
     const baseMetabolic = new BaseMetabolicRate({
       activity: httpRequest.body.activity,
       age: httpRequest.body.age,
-      gender: httpRequest.body.gender,
+      gender: httpRequest.body.gender as any,
       height: httpRequest.body.height,
       weight: httpRequest.body.weight
     })
 
     const user = new User(httpRequest.body)
 
+    const calories = Number(baseMetabolic.calc(httpRequest.body.target as any))
+    const { carboPercentage, fatPercentage, proteinPercentage } = new MacronutrienteRate(calories).calc(httpRequest.body.weight)
+
     const nutritionalGoals = new NutritionGoals({
-      calories: baseMetabolic.calc('down').toString(),
-      carboPercentage: 2,
-      desiredWeight: 2,
-      fatPercentage: 2,
-      proteinPercentage: 2,
-      userId: user.id,      
+      calories,
+      carboPercentage,
+      fatPercentage,
+      proteinPercentage,
+      userId: user.id,
     })
+    Reflect.deleteProperty(nutritionalGoals, 'userId')
 
     user.nutritionalGoals.push(nutritionalGoals)
 
     const response = await this.userService.add(user)
     return ok({ user: response })
+
   }
 }

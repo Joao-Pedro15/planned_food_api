@@ -6,5 +6,4 @@ export interface NutritionGoalsDTO {
  proteinPercentage: number
  carboPercentage: number
  status?: 'Active' | 'Inactive'
- desiredWeight: number | null
 }

@@ -1,6 +1,5 @@
 import { Router } from "express";
 
-import { makeGetAllUsersControllerFactory } from '@/controllers/user'
 import { adaptRoute } from "@/main/route";
 import { authMiddleware } from "@/middlewares/auth/authMiddleware";
 import { makeAddMealControllerFactory } from "@/controllers";

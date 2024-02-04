@@ -11,7 +11,7 @@ export class UserServices {
 
   async getByEmail(email: string) {
     const user = await this.repository.getByEmail(email)
-    return new User(user)
+    return !user ? null : new User(user)
   }
 
   async add(data: User) {
