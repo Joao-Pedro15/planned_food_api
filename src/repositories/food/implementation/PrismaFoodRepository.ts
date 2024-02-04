@@ -1,16 +1,24 @@
 import { Prisma } from "@/infra/prisma";
-import { FoodRepository } from "../FoodRepository";
+import { FoodRepository, QueryFood } from "../FoodRepository";
+import { pagination, filterNumber } from "@/utils";
 
 export class PrismaFoodRepository implements FoodRepository {
     private readonly prisma = Prisma
-    constructor(){}
+    constructor() { }
 
-    async get() {
+    async get(query: QueryFood) {
+        const { skip, take } = pagination(query.page)
         return await this.prisma.food.findMany({
-            include:{
+            where: {
+                name: { contains: query.search },
+                categoryId: filterNumber(query.categoryId),
+            },
+            skip,
+            take,
+            include: {
                 nutrients: true,
-                category:{
-                    select:{
+                category: {
+                    select: {
                         name: true
                     }
                 }

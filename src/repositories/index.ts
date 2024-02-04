@@ -1,2 +1,2 @@
-export * from './FoodRepository'
+export * from './food'
 export * from './user'

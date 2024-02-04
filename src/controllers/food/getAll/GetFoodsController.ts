@@ -10,7 +10,7 @@ export class GetAllFoodsController extends Controller {
  }
 
  async execute(httpRequest: HttpRequest): Promise<HttpResponse> {
-  const foods = await this.foodServices.get()
+  const foods = await this.foodServices.get(httpRequest.query)
   return ok({ foods })
  }
 }

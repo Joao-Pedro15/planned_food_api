@@ -1,4 +1,9 @@
+import { Query } from "@/base/Query";
 import { Food, Nutrient } from "@prisma/client";
+
+export interface QueryFood extends Query {
+    categoryId?: string
+}
 
 export interface FoodWithNutrients extends Food {
     nutrients: Nutrient
@@ -8,5 +13,5 @@ export interface FoodWithNutrients extends Food {
 }
 
 export interface FoodRepository {
-    get(): Promise<FoodWithNutrients[]>
+    get(query: QueryFood): Promise<FoodWithNutrients[]>
 }
