@@ -9,7 +9,7 @@ export interface UserDTO {
   height: number
   weight: number
   age: number
-  gender: 'male' | 'female'
+  gender: string
   confirmPassword?: string
   activity?: keyof typeof activyList
   target?: string
