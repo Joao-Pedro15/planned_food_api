@@ -16,7 +16,7 @@ export class AddMealController extends Controller {
 
  async execute(httpRequest: HttpRequest<MealDTO>): Promise<HttpResponse> {
 
-  const meal = new Meal(httpRequest?.body)
+  const meal = new Meal({ ...httpRequest?.body, userId: httpRequest.userLogged.id })
   const mealItems = []
   if (meal.items.length) {
    for (let item of meal.items) {
