@@ -27,12 +27,11 @@ model User {
 model NutritionGoals {
   id                String @id @default(uuid())
   userId            String
-  calories          Int
-  fatPercentage     Int
-  proteinPercentage Int
-  carboPercentage   Int
+  calories          Float
+  fatPercentage     Float
+  proteinPercentage Float
+  carboPercentage   Float
   status            String
-  desiredWeight     Int?
   user              User   @relation(references: [id], fields: [userId])
 }
 
