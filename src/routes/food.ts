@@ -6,7 +6,7 @@ import { makeGetAllFoodsControllerFactory } from "@/controllers";
 
 const router = Router()
 
-//router.use(authMiddleware)
+router.use(authMiddleware)
 
 
 router.get('/getAll', adaptRoute(makeGetAllFoodsControllerFactory()))
