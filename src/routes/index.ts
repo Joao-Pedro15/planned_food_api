@@ -1,4 +1,4 @@
-import auth from './auth'
+import auth from './auth/auth'
 import user from './user'
 import food from './food'
 import meal from './meal'
